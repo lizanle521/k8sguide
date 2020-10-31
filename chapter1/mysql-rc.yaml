@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: ReplicationController # 副本控制器 rc
+metadata:
+  name: mysql  # rc名称，全局唯一
+spec:
+  replicas: 1
+  selector:
+    app : mysql
+  template:
+    metadata:
+      labels:
+        app : mysql
+    spec:
+      containers:
+      - name: mysql
+        image: mysql:5.7
+        ports:
+        - containerPort: 3306
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: "123456"
